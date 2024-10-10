@@ -1,0 +1,10 @@
+"torproject.org"'a ulaşılamadığı zaman aşağıdaki link kullanılabilir:
+https://tor.eff.org
+
+Tor browser'ın orjinal sitesinde başka mirror'ların linkleri mevcut:
+https://2019.www.torproject.org/getinvolved/mirrors.html.en
+
+Bunlardan bazıları:
+https://tormirror.tb-itf-tor.de/download/
+https://mirror.oldsql.cc/tor/download/
+https://tor.0x3d.lu/download/

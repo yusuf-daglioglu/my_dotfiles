@@ -1,0 +1,4 @@
+"can_be_deleted" dizinlerine sadece ufak ISO dosyaları olmalı. sanal makine dosyalarının kopyalarını bulundurmamalıyım. bunun sebepleri:
+- yıllardır kullandığım sanal makinelerdeki, machine-id gibi bilgiler her tarafta olmamalı.
+- 1 GB kullanabilmek için 40 GBlik sanal makina silmek zorunda kalmamalıyım.
+- sanal makinelerde sparse file olabiliyor. aslında hdd'de olmayan kısım yer kaplamış görünebiliyor. bundan %100 emin olamıyorum. bu sebeple sanal makine dosyaları kullanılmamalı.

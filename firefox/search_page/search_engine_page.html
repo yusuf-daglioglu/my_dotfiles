@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Enables Responsive Web Design -->
+  <title>🔍 SEARCH</title>
+  <script src="./NoSleep_min_v0.12.0.js"></script>
+  <script src="./beep_base64.js"></script>
+  <script src="./duckduckgo_logo_base64.js"></script>
+  
+  <style>
+    *:not(.selectable) {
+      /* all elements except elements with selectable class */
+      /* Do not allow select change. This is nice for touch devices. */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    p,
+    li {
+      color: white;
+    }
+
+    * {
+      font-weight: bold;
+      font-size: 105%;
+    }
+
+    input {
+      /* margin creates empty area arround the element.
+      This is nice for touching devices. */
+      margin: 6px;
+    }
+
+    div {
+      border-style: solid;
+      border-color: rgb(4, 4, 51);
+    }
+
+    body {
+      background-color: rgb(32, 41, 69);
+    }
+
+    textarea {
+      background-color: rgb(164, 193, 193);
+      font-size: 150%;
+      /* do not set %100, otherwise it will conflict with margin. */
+      width: 92%;
+    }
+
+    .capslock_warning_textarea_class {
+      border-color: red;
+      box-shadow: 0 0 50px red;
+    }
+
+    input[type=button],
+    input[type=submit] {
+      /* white-space and word-wrap makes multiline button (add heigh to buttons)
+      if they don't fit in one line.
+      This is important for very small screens. */
+      white-space: normal;
+      word-wrap: break-word;
+    }
+  </style>
+
+  <script>
+
+    "use strict";
+
+    function beep() {
+      try {
+        var media = new Audio(beepBase64Str);
+        media.play();
+      } catch (e) {
+        console.warn("can not play sound.");
+        console.warn(e);
+      }
+    }
+
+    function addToStorage(name, value) {
+      var epochTime = Date.now();
+
+      var key = name + "_" + epochTime;
+      localStorage.setItem(key, value);
+      // document.cookie = key + "=" + value + ";max-age=1728000;SameSite=Strict;Secure"; // second which equals to 20 days. otherwise cookies are removed after restart.
+
+      // cookies vs localstorage
+      // - cookies are not availbnale on google for local files.
+      // - localstorage memory is larger than cookie.
+      // - cookie code is more complex.
+    }
+
+    function addSearchTextToStorage() {
+      var searchText = document.getElementById("searchTextboxId").value;
+      addToStorage("searched_text", searchText);
+    }
+
+    function addUrlToStorage() {
+      var url = document.getElementById("searchTextboxId").value;
+      var urlEncoded = encodeURI(url);
+      var urlSafe = urlEncoded.replace(new RegExp(";", "g"), "%3B");
+      addToStorage("url", urlSafe);
+    }
+
+    function goToPageButtonClickActionHandler() {
+      addUrlToStorage();
+      location.assign(document.getElementById("searchTextboxId").value);
+    }
+
+    function goToPageOnANewTabButtonClickActionHandler() {
+      addUrlToStorage();
+      window.open(document.getElementById("searchTextboxId").value);
+    }
+
+    function loopSearchTextElements(callback) {
+
+      var searchTextBoxIdList = ["startPageSearchTextboxId", "duckDuckGoSearchTextboxId", "googleSearchTextboxId"];
+
+      var i;
+      var elementId;
+      var element;
+      for (i = 0; i < searchTextBoxIdList.length; i++) {
+        elementId = searchTextBoxIdList[i];
+        element = document.getElementById(elementId);
+        callback(searchTextBoxIdList[i], element);
+      }
+    }
+
+    function toLowerCase() {
+      var element = document.getElementById("searchTextboxId");
+      element.value = element.value.toLocaleLowerCase();
+    }
+
+    function addHttpWww() {
+      var element = document.getElementById("searchTextboxId");
+      element.value = "http://www." + element.value;
+    }
+
+    function trim() {
+      var element = document.getElementById("searchTextboxId");
+      element.value = element.value.replace(/\s\s+/g, " "); // merge multiple spaces into one
+    }
+
+    function mergeMultipleSpacesAndRemoveEndOfLines(text) {
+
+      var cleanedText = text.replace(/\s\s+/g, " "); // merge multiple spaces into one
+      cleanedText = cleanedText.replace(/[\r\n]+/gm, ""); // remove end of line \r\n
+      cleanedText = cleanedText.replace(/[\r]+/gm, ""); // remove end of line \r
+      cleanedText = cleanedText.replace(/[\n]+/gm, ""); // remove end of line \n
+      return cleanedText;
+    }
+
+    function isTexboxIsNotEmpty(searchTextboxId) {
+      var searchTextBox = document.getElementById(searchTextboxId);
+      var cleanedText = mergeMultipleSpacesAndRemoveEndOfLines(searchTextBox.value);
+      if (cleanedText.trim().length === 0) {
+        return false; // do not submit if filtred test is empty
+      }
+      return true;
+    }
+
+    function warnForCapsLockAndSubmitOnEnter(event) {
+
+      var searchTextBox = document.getElementById("searchTextboxId");
+
+      // Warn here. beacause we can not trust "to lower case" button. because it does not works on some character as expected.
+
+      var isCapsLockEnabled = event.getModifierState && event.getModifierState("CapsLock");
+
+      if (isCapsLockEnabled) {
+        beep();
+        searchTextBox.classList.add("capslock_warning_textarea_class");
+      } else {
+        searchTextBox.classList.remove("capslock_warning_textarea_class");
+      }
+
+      if (event.which === 13 && !event.shiftKey) {
+
+        if (submitButtonClickActionHandler("duckDuckGoSearchTextboxId") === true) {
+          document.getElementById("duckDuckGoFormId").submit();
+        }
+        event.preventDefault(); // prevent end of line character on inputs
+      }
+    }
+
+    function searchBackgroundPage(searchTextboxId, formId) {
+
+      var searchTextboxElement = document.getElementById(searchTextboxId);
+
+      var urlSafeStr = encodeURIComponent(searchTextboxElement.value);
+
+      var newWindow = window.open(document.URL + "?"
+        + "searchText" + "=" + urlSafeStr
+        + "&" + "formId" + "=" + formId);
+    }
+
+    function copySearchTextBoxToForm(textBoxId) {
+      var searchText = document.getElementById("searchTextboxId").value;
+      document.getElementById(textBoxId).value = searchText;
+    }
+
+    function submitButtonClickActionHandler(searchTextboxId) {
+      copySearchTextBoxToForm(searchTextboxId);
+      if (isTexboxIsNotEmpty(searchTextboxId) === false) {
+        return false;
+      } else {
+        addSearchTextToStorage();
+        return true;
+      }
+    }
+
+    function newTabSubmitButtonClickActionHandler(searchTextboxId, formId) {
+      copySearchTextBoxToForm(searchTextboxId);
+      if (isTexboxIsNotEmpty(searchTextboxId) === false) {
+        return;
+      }
+      addSearchTextToStorage();
+      searchBackgroundPage(searchTextboxId, formId);
+    }
+
+    var userClickedAnyWhere = false;
+    var noSleepLibLoaded = false;
+    var noSleepLib;
+    var noSleepEnabled = false;
+
+    function enableNoSleep(toggleButton) {
+      noSleepLib.enable();
+      noSleepEnabled = true;
+      toggleButton.value = "Screen-lock is enabled ✅";
+    }
+
+    function disableNoSleep(toggleButton) {
+      noSleepLib.disable();
+      noSleepEnabled = false;
+      toggleButton.value = "Screen-lock is disabled ❌";
+    }
+
+    function clickOnAnyElement() {
+      var toggleButton = document.querySelector("#toggle-screen-lock");
+      if (!userClickedAnyWhere && noSleepLibLoaded) {
+        enableNoSleep(toggleButton);
+        userClickedAnyWhere = true;
+      }
+    }
+
+    function pageInit() {
+
+      var toggleButton = document.querySelector("#toggle-screen-lock");
+      toggleButton.value = "Screen-lock is disabled ❌";
+
+      try {
+        noSleepLib = new NoSleep();
+        noSleepLibLoaded = true;
+      } catch (e) {
+        console.warn("can not enable disable screen-lock feature.");
+        console.warn(e);
+        toggleButton.value = "Screen-lock feature can not be enabled ❌";
+        toggleButton.disabled = true;
+      }
+
+      var allElements = document.getElementsByTagName("*");
+      var i;
+      for (i = 0; i < allElements.length; i++) {
+        allElements[i].addEventListener("click", clickOnAnyElement);
+      }
+
+      toggleButton.addEventListener("click", function () {
+        if (noSleepEnabled) {
+          disableNoSleep(toggleButton);
+        } else {
+          enableNoSleep(toggleButton);
+        }
+      }, false);
+
+      debugger;
+      var duckDuckoLogoEl = document.querySelector("#duckDuckoLogo");
+      duckDuckoLogoEl.src = duckDuckGoLogoBase64;
+      
+      console.log("greek characters:");
+      console.log("Α α Β β Γ γ Δ δ Ε ε Ζ ζ Η η Θ θ Κ κ Λ λ Μ μ Ν ν Ξ ξ Ο ο Π π Ρ ρ Σ σ/ς Τ τ Υ υ Φ φ Χ χ Ψ ψ Ω ω");
+      console.log("other characters:");
+      console.log("é € £ $ ¶");
+      console.log("ascii table:");
+      console.log("! \" # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \ ] ^ _ ` a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~");
+      console.log("turkish characters:");
+      console.log("ç ö ş ğ ü ı Ç Ö Ş Ğ Ü İ");
+      console.log("For other characters try google-translater input which supports all languages: https://translate.google.com/");
+    }
+
+    function forwardPageAutomatically(searchText, urlParams) {
+      loopSearchTextElements(function (id, element) {
+        element.value = searchText;
+      });
+
+      var formId = urlParams.get("formId");
+      var form = document.getElementById(formId);
+      form.submit();
+    }
+
+    function printAllHistory() {
+
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+        addToSearchHistory(value);
+      }
+
+      // support for cookies
+      // var keyValuePairs = document.cookie.split(/; */);
+      // for (var i = 0; i < keyValuePairs.length; i++) {
+      //  var key = keyValuePairs[i].substring(0, keyValuePairs[i].indexOf("="));
+      //  var value = keyValuePairs[i].substring(keyValuePairs[i].indexOf("=") + 1);
+      //  addToSearchHistory(value);
+      // }
+
+      var toggleButton = document.querySelector("#show_history_button_id");
+      toggleButton.style.display = "none";
+    }
+
+    function copyTextSearchBox(text) {
+      var searchTextbox = document.getElementById("searchTextboxId");
+      searchTextbox.value = text;
+    }
+
+    function addToSearchHistory(text) {
+      var ul = document.getElementById("old_search_history");
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(text));
+      li.onclick = function () {copyTextSearchBox(text);};
+      ul.appendChild(li);
+    }
+
+    window.onload = function () {
+      // those should be inside window.onload.
+      // otherwise in some cases getElementById returns null
+      // because html is not fully loaded.
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var searchText = urlParams.get("searchText");
+      if (searchText) {
+        forwardPageAutomatically(searchText, urlParams);
+      } else {
+        setTimeout(function () {pageInit();}, 10);
+      }
+    };
+
+  </script>
+</head>
+
+<body>
+  <p>🔍 SEARCH</p>
+
+  <div>
+    <input type="button" value="AB-->ab" onclick="toLowerCase()" title="to lower case">
+    <input type="button" value="add http://www." onclick="addHttpWww()" title="add as prefix">
+  </div>
+
+  <textarea class="selectable" rows="6" id="searchTextboxId" autofocus
+    onkeypress="warnForCapsLockAndSubmitOnEnter(event);"></textarea>
+
+  <div>
+    <form method="post" action="https://startpage.com/do/search" id="startPageFormId">
+      <input type="hidden" id="startPageSearchTextboxId" name="query" />
+      <p style="display: inline-block;">Startpage</p>
+      <input type="submit" value="search" onclick="return submitButtonClickActionHandler('startPageSearchTextboxId')" />
+      <input type="button" value="new tab"
+        onclick="newTabSubmitButtonClickActionHandler('startPageSearchTextboxId', 'startPageFormId')" />
+    </form>
+  </div>
+
+  <div>
+    <form method="post" action="https://duckduckgo.com/" id="duckDuckGoFormId">
+      <input type="hidden" id="duckDuckGoSearchTextboxId" name="q" />
+      <img id="duckDuckoLogo" width="50" height="50" src="" alt="DuckDuckGo" />
+      <input type="submit" value="search"
+        onClick="return submitButtonClickActionHandler('duckDuckGoSearchTextboxId')" />
+      <input type="button" value="new tab"
+        onclick="newTabSubmitButtonClickActionHandler('duckDuckGoSearchTextboxId', 'duckDuckGoFormId')" />
+    </form>
+  </div>
+
+  <div>
+    <p style="display: inline-block;">🔗 URL</p>
+    <input type="button" value="go to" onclick="goToPageButtonClickActionHandler()" />
+    <input type="button" value="new tab" onclick="goToPageOnANewTabButtonClickActionHandler()" />
+  </div>
+
+  <div>
+    <form method="get" action="https://www.google.com/search" id="googleFormId">
+      <input type="hidden" id="googleSearchTextboxId" name="query" />
+      <p style="display: inline-block; color: white;">G</p>
+      <p style="display: inline-block; color: red;">o</p>
+      <p style="display: inline-block; color: yellow;">o</p>
+      <p style="display: inline-block; color: white;">g</p>
+      <p style="display: inline-block; color: green;">l</p>
+      <p style="display: inline-block; color: red;">e</p>
+      <input type="submit" value="search" onClick="return submitButtonClickActionHandler('googleSearchTextboxId')" />
+      <input type="button" value="new tab"
+        onclick="newTabSubmitButtonClickActionHandler('googleSearchTextboxId', 'googleFormId')" />
+    </form>
+  </div>
+
+  <div>
+    🔒
+    <input type="button" id="toggle-screen-lock" value="" />
+  </div>
+
+  <div>
+    🕑
+    <input type="button" id="show_history_button_id" onclick="printAllHistory()" value="Show old history" />
+    <ul id="old_search_history"></ul>
+  </div>
+
+</body>
+
+</html>
