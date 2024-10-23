@@ -1,0 +1,15 @@
+- min android 11 (but android 12 required for neo-store auto-updates).
+- without any running application whole system uses 3.5 GB RAM.
+- 62 GB DISK TOTAL
+  - 27GB musics
+  - 13GB android-installed-apps
+  - 19GB android-os
+  - 3GB backups
+- brands which bring least 3rd pary apps:
+  - motorala
+  - one plus
+  - nothing phone
+  - fair phone
+  - HMD & nokia
+  - google pixel (recommended by privacyguides)
+  - Sony
