@@ -1,0 +1,5 @@
+"can_be_deleted" dizinlerine sadece ufak ISO dosyaları ve/veya ""dd" komutu ile doldurulan (cc_scrpt'te hazır fonksiyon yazdım) dosyalar olmalı. sanal makine dosyalarının kopyalarını bulundurmamalıyım. bunun sebepleri:
+- yıllardır kullandığım sanal makinelerdeki, machine-id gibi bilgiler her tarafta olmamalı.
+- dosya sistemi EXT3, FAT32, EXFAT, NTFS haricinde ise dd komutu haricindeki doldurma işlemleri işe yaramaz. Çünkü dublike dosyalar gelişmiş dosya sistemlerinde yer kaplamayabilir.
+- 1 GB kullanabilmek için 10 GBlik sanal makina silmek zorunda kalmamalıyım.
+- sanal makinelerde sparse file olabiliyor. aslında hdd'de olmayan kısım yer kaplamış görünebiliyor. bundan %100 emin olamıyorum. bu sebeple sanal makine dosyaları kullanılmamalı.

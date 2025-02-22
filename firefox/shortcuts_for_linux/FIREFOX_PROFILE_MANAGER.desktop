@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=FIREFOX_PROFILE_MANAGER
+Exec=firefox -P -no-remote --class FIREFOX_PROFILE_MANAGER
+Icon=/home/user1/ICONS/FIREFOX_PROFILE_MANAGER.jpg
+StartupWMClass=FIREFOX_PROFILE_MANAGER
