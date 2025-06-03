@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=firefox_p_daily_hardened
+Exec=firefox -P "p_daily_hardened" --class firefox_p_daily_hardened
+Icon=/home/user1/icons/firefox_p_daily_hardened.jpg
+StartupWMClass=firefox_p_daily_hardened
