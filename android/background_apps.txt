@@ -1,0 +1,2 @@
+If any app does not work as background process read that:
+https://github.com/urbandroid-team/dont-kill-my-app
