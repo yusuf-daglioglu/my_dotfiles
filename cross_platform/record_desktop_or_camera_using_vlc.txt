@@ -1,0 +1,10 @@
+* record desktop or camera
+
+vlc --> media --> open capture device --> 
+
+- capture mode = "desktop"/"video camera"
+- desired frame = 30 f/s (bu sayının altı yada üstündeyken sıkıntılar çıkıyor. sebebini bulamadım.)
+
+Daha sonra "Play" e basılır. videonun herhangi bir yerine sağ tıklanıp "record"'a basıldığında /Home/user/videos/ içerisine dosya kaydolacaktır. 
+
+dosyanın boyutu çok büyük oluyor.
