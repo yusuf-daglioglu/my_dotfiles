@@ -1,0 +1,3 @@
+# SUBTITLE
+
+"vlsub" plugin is default installed. This plugin finds automaticaally the subtitles. If the plugin will not work, try smplayer.
