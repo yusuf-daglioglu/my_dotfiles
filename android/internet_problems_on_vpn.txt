@@ -1,0 +1,7 @@
+if you use RethinkDNS or any VPN, and one of the apps can not connect to internet, you should do first:
+
+Android settings -> connections -> VPN -> click the settings icon for rethinkdns -> disable: "block connections without VPN"
+
+And then:
+
+RethinkDNS -> firewall -> All apps -> THE_APP_WHICH_IS_NOT_WORKING -> firewall settings -> only enable: "exclude".
