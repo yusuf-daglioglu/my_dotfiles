@@ -1,0 +1,41 @@
+[character]
+format='$symbol'
+success_symbol = '[➜](bold green) '
+error_symbol = '[➜](bold green) ' # because we show exit code
+
+[directory]
+truncation_length = 8 # show max level of parent directory
+truncation_symbol = '…/' # prefix if truncated
+home_symbol = '$HOME' # so I can copy and paste fast
+read_only = ' 🔒read-only-directory'
+read_only_style = 'bold yellow'
+
+[shell]
+disabled = false
+bash_indicator ='bash'
+fish_indicator = 'fish'
+
+[shlvl] # shows nested shells (example: run bash or zsh inside zsh)
+disabled = false
+format = '[↕️ level:$shlvl]($style) '
+style = 'blue bold'
+
+[status] # last exit code
+disabled = false
+recognize_signal_code = true
+format = '[exit code:$status]($style) '
+
+[sudo] # shows if sudo command required password
+format = '[sudo password cached ]($style)'
+disabled = false
+
+[time]
+disabled = false
+format = '🕙[$time]($style) '
+
+[custom.empty_dir]
+command = '[ -z "$(ls -A)" ] && echo empty directory'
+when = ''' [ "$STARSHIP_SHELL" = "bash" ] || [ "$STARSHIP_SHELL" = "zsh" ] || [ "$STARSHIP_SHELL" = "sh" ] ''' # only SH implementations can run command above.
+style = 'bold red'
+disabled = false
+
