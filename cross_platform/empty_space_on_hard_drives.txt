@@ -1,0 +1,58 @@
+"can_be_deleted" dizinlerine sadece ufak ISO dosyaları ve/veya ""dd" komutu ile doldurulan (cc_script'te hazır fonksiyon yazdım) dosyalar olmalı. sanal makine dosyalarının kopyalarını bulundurmamalıyım. bunun sebepleri:
+- yıllardır kullandığım sanal makinelerdeki, machine-id gibi bilgiler her tarafta olmamalı.
+- dosya sistemi EXT3, FAT32, EXFAT, NTFS haricinde ise dd komutu haricindeki doldurma işlemleri işe yaramaz. Çünkü duplicated dosyalar gelişmiş dosya sistemlerinde yer kaplamayabilir.
+- 1 GB kullanabilmek için 10 GB'lik sanal makina silmek zorunda kalmamalıyım.
+- sanal makinelerde sparse file olabiliyor. aslında hdd'de olmayan kısım yer kaplamış görünebiliyor. bundan %100 emin olamıyorum. bu sebeple sanal makine dosyaları kullanılmamalı.
+
+shell script:
+
+c_empty_space_fill(){
+
+   ##############################
+   # FUNCTION PARAMETERS
+   ##############################
+   local -r TEMP_WRITE_DIRECTORY_FULL_PATH="$1"
+   ##############################
+   ##############################
+   ##############################
+   
+   ___required_parameters=("TEMP_WRITE_DIRECTORY_FULL_PATH")
+   ___check_parameters "$@" || return
+
+   ___do_executables_exist "dd" "awk" "date" "sleep" || return
+
+   available_spac_as_byte=$(df "$TEMP_WRITE_DIRECTORY_FULL_PATH" | awk 'NR==2 {print $4}')
+   
+   available_space_as_gigabyte=$((available_spac_as_byte / 1024 / 1024))
+   
+   # last 6 gb will not be touch.
+   available_space_as_gigabyte=$((available_space_as_gigabyte - 6))
+    
+   if [ "$available_space_as_gigabyte" -le 0 ]; then
+       ___print_screen "already filled"
+       return
+   fi
+    
+   time_to_sleep=$((5 * 1))
+    
+   while [ "$available_space_as_gigabyte" -gt 0 ]; do
+      
+      now_in_seconds=$(date +%s)
+
+      file_name="random_file_$now_in_seconds"
+       
+      ___print_screen "started to new file: $file_name"
+       
+      ___execute dd if=/dev/urandom of="$TEMP_WRITE_DIRECTORY_FULL_PATH/$file_name" bs=1M count=1000 || {
+         ___errorHandler "$?" 1012005
+         return
+      }
+       
+      available_space_as_gigabyte=$((available_space_as_gigabyte - 1))
+
+      ___print_screen "waiting for $time_to_sleep mintes"
+      ___execute sleep $time_to_sleep
+   done
+
+   c_notify_user "1" "fill space finished for $CURRENT_DIR_NAME"
+}
