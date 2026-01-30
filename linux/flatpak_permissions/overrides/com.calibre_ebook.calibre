@@ -1,0 +1,12 @@
+[Context]
+shared=!ipc;!network
+sockets=!pulseaudio;!fallback-x11;!x11
+devices=!all
+filesystems=!host
+
+[System Bus Policy]
+org.freedesktop.UDisks2=none
+
+[Session Bus Policy]
+com.canonical.AppMenu.Registrar=none
+org.kde.StatusNotifierWatcher=none
