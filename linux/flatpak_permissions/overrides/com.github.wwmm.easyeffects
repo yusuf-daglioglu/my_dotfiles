@@ -1,0 +1,10 @@
+[Context]
+shared=!ipc
+sockets=!fallback-x11;!x11
+devices=!dri
+
+[Session Bus Policy]
+com.canonical.AppMenu.Registrar=none
+org.kde.kconfig.notify=none
+org.kde.KGlobalSettings=none
+org.kde.StatusNotifierWatcher=none
