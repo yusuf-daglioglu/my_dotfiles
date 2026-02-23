@@ -1,0 +1,7 @@
+[Context]
+shared=!ipc;!network
+sockets=!pulseaudio;!fallback-x11;!x11
+devices=!dri
+
+[Session Bus Policy]
+org.com_bilingify_readest.SingleInstance=none

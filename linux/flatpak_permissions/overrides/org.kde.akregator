@@ -1,0 +1,28 @@
+[Context]
+shared=!ipc
+sockets=!fallback-x11;!x11
+devices=!dri
+filesystems=!xdg-config/kdeglobals
+
+[System Bus Policy]
+org.freedesktop.NetworkManager=none
+
+[Session Bus Policy]
+org.kde.kded6=none
+org.kde.JobViewServer=none
+org.kde.StatusNotifierWatcher=none
+org.kde.kconfig.notify=none
+org.kde.kwalletd6=none
+org.kde.Solid.PowerManagement=none
+org.kde.KGlobalSettings=none
+com.canonical.AppMenu.Registrar=none
+org.kde.kded5=none
+org.kde.kwalletd5=none
+org.kde.kglobalaccel=none
+org.kde.knotify=none
+org.kde.accountwizard=none
+org.kde.pimsettingsexporter=none
+org.freedesktop.Akonadi.*=none
+org.kde.pim.*=none
+org.kde.kaddressbook=none
+org.freedesktop.Akonadi=none

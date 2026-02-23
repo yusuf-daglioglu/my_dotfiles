@@ -1,0 +1,20 @@
+[Context]
+shared=!ipc
+sockets=!fallback-x11;!x11
+devices=!dri
+filesystems=!xdg-config/kdeglobals;!host
+
+[System Bus Policy]
+org.freedesktop.login1=none
+org.freedesktop.UPower=none
+
+[Session Bus Policy]
+org.freedesktop.Notifications=none
+org.kde.kdeconnect=none
+org.freedesktop.PowerManagement=none
+org.kde.StatusNotifierWatcher=none
+org.kde.KGlobalSettings=none
+org.ayatana.indicator.application=none
+com.canonical.AppMenu.Registrar=none
+org.kde.kconfig.notify=none
+org.gnome.SessionManager=none

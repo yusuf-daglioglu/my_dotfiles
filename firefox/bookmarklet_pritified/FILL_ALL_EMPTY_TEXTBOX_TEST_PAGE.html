@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- meta charset="utf-8" prevents only the console warnings of browser.  -->
+    <meta charset="utf-8">
+    <title>Test Form Page</title>
+    <script>
+
+        function generateAttributeHtmlInsideXml(attr, val) {
+            return " " + attr + '=' + '"' + val + '" ';
+        }
+
+        function generateAttributeTextHtml(attr, val) {
+            return ' <b>' + attr + ':</b>' + val + " "
+        }
+
+        function addTitleLine(text) {
+            var newHtml = '<br><br><div>*******' + text + '*******</div><br>';
+            bodyEl = document.getElementById('bodyId');
+            bodyEl.insertAdjacentHTML('beforeend', newHtml);
+        }
+
+        function addElement(name, type, minLength, maxLength, min, max) {
+            var newHtml = '<div>'
+            newHtml = newHtml + generateAttributeTextHtml("name", name);
+            newHtml = newHtml + generateAttributeTextHtml("type", type);
+            if (minLength) {
+                newHtml = newHtml + generateAttributeTextHtml("minLength", minLength);
+            }
+            if (maxLength) {
+                newHtml = newHtml + generateAttributeTextHtml("maxLength", maxLength);
+            }
+            if (min) {
+                newHtml = newHtml + generateAttributeTextHtml("min", min);
+            }
+            if (max) {
+                newHtml = newHtml + generateAttributeTextHtml("max", max);
+            }
+
+            newHtml = newHtml + '<input name="' + name + '" type="' + type + '"';
+            if (minLength) {
+                newHtml = newHtml + generateAttributeHtmlInsideXml("minLength", minLength);
+            }
+            if (maxLength) {
+                newHtml = newHtml + generateAttributeHtmlInsideXml("maxLength", maxLength);
+            }
+            if (min) {
+                newHtml = newHtml + generateAttributeHtmlInsideXml("min", min);
+            }
+            if (max) {
+                newHtml = newHtml + generateAttributeHtmlInsideXml("max", max);
+            }
+
+            newHtml = newHtml + '></div>';
+            bodyEl = document.getElementById('bodyId');
+            bodyEl.insertAdjacentHTML('beforeend', newHtml);
+        }
+
+        function addElements() {
+            var ANY_TEXT = "ANY_TEXT";
+
+            addElement(ANY_TEXT, "text");
+
+            addTitleLine("NUMBER")
+            addElement(ANY_TEXT, "number");
+            addElement("number", "text", "1", "2");
+            addElement("number", "text", "1", "3");
+            addElement("number", "text", "3", "3");
+            addElement("number", "text", "3", "4");
+            addElement(ANY_TEXT, "number", "", "", "1", "2");
+            addElement(ANY_TEXT, "number", "", "", "100", "200");
+
+            addTitleLine("PASSWORD")
+            addElement(ANY_TEXT, "password");
+            addElement("password", "text");
+            addElement("sifre", "text");
+
+            addTitleLine("PHONE")
+            addElement(ANY_TEXT, "phone");
+            addElement("phone", "text");
+            addElement("telefon", "text");
+
+            addTitleLine("CARD")
+            addElement("card", "text");
+            addElement("kart", "text");
+
+            addTitleLine("CARD CVV")
+            addElement("cvv", "text");
+
+            addTitleLine("EMAIL")
+            addElement(ANY_TEXT, "email");
+            addElement("mail", "text");
+
+            addTitleLine("URL")
+            addElement(ANY_TEXT, "url");
+            addElement("url", "text");
+
+
+        }
+
+    </script>
+    <script type="text/javascript" src="FILL_ALL_EMPTY_TEXTBOX.js"></script>
+</head>
+
+<body onload="addElements()" id="bodyId">
+</body>
+
+</html>
