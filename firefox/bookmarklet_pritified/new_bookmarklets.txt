@@ -1,0 +1,4 @@
+https://github.com/dsheiko/autofill new form names
+
+https://www.phpied.com/form-auto-fill-bookmarklet/
+

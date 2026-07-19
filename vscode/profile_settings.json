@@ -1,0 +1,220 @@
+{
+  //////////////////////////////////////
+  // APPLICATION SCOPE SETTINGS
+  // - those will work only from "default profile".
+  // - firewall (via fake proxy) is most below of this file. that is also "appllication scope" config.
+
+  "window.newWindowProfile": "profile1",
+
+  // none: disable vscode update.
+  "update.mode": "none", // VSCode Core
+
+  "workbench.enableExperiments": false, // VSCode Core
+
+  "telemetry.telemetryLevel": "off", // VSCode Core
+  "update.showReleaseNotes": false, // VSCode Core
+
+  "telemetry.enableTelemetry": false, // VSCode Core
+  //////////////////////////////////////
+  // end of APPLICATION SCOPE SETTINGS
+  //////////////////////////////////////
+
+  "editor.fontSize": 12, // source code text font size.
+
+  "window.zoomLevel": 0.4, // application objects and text size
+
+  // file tree explorer tab lenght between each level.
+  "workbench.tree.indent": 17,
+
+  "editor.cursorWidth": 3,
+
+  // always show colors for passive level on file explorer tree.
+  "workbench.tree.renderIndentGuides": "always",
+
+  // if OS (desktop manager) has High-Contrast enabled,
+  // optionally you can enable below theme to use another theme on VSCode.
+  // "Default Dark Modern" is feature of "Default Themes" extension.
+  "workbench.preferredHighContrastColorTheme": "Default Dark Modern",
+
+  "workbench.colorCustomizations": {
+
+    // EDITOR LEVEL COLORS
+    // test this config on JSON or Markdown files.
+    // active level color:
+    "editorIndentGuide.activeBackground1": "#50cd47",
+    // passive level color:
+    "editorIndentGuide.background1": "#4685de",
+    // END OF - EDITOR LEVEL COLOR
+
+    // FILE EXPLORER LEVEL COLORS
+    // active level color:
+    "tree.indentGuidesStroke": "#50cd47",
+    // passive level color:
+    "tree.inactiveIndentGuidesStroke": "#4685de",
+    // END OF - FILE EXPLORER LEVEL COLORS
+
+    // editor cursor color.
+    "editorCursor.foreground": "#ff0000", 
+    
+    // terminal cursor color.
+    "terminalCursor.foreground": "#ff0000"
+  },
+
+  //default behavior should copy the raw text (because it use more often).
+  // if you need syntax highlighted version, you can use command:
+  //"editor.action.clipboardCopyWithSyntaxHighlightingAction"
+  "editor.copyWithSyntaxHighlighting": false,
+
+  // always show for undo operations on file explorer tree.
+  "explorer.confirmUndo": "verbose",
+    
+  "git.autorefresh": false,
+  
+  "git.autofetch": false,
+
+  "diffEditor.ignoreTrimWhitespace": false,
+  
+  "editor.renderWhitespace": "all",
+  
+  "editor.renderControlCharacters": true,
+  
+  "breadcrumbs.enabled": true,
+    
+  "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+
+  // keywords: javascript nodejs js
+  "typescript.disableAutomaticTypeAcquisition": true, 
+  "npm.fetchOnlinePackageInfo": false,
+  
+  "editor.mouseWheelZoom": true,
+  
+  "workbench.startupEditor": "none",
+  
+  "search.useIgnoreFiles": false,
+  
+  "files.autoSave": "off",
+  
+  // enabled terminal cursor blinking.
+  "terminal.integrated.cursorBlinking": true, 
+  
+  // only "paste" or "default" allowed.
+  "terminal.integrated.middleClickBehavior": "default", 
+
+  // always show scrollbars
+  "editor.scrollbar.horizontal": "visible",
+  "editor.scrollbar.vertical": "visible",
+
+  // FORMAT FOR ANY TYPE OF FILE
+  // "editor.formatOnSave": false,
+  /*
+  "editor.codeActionsOnSave": {
+    // in case we work on custom development branch. 
+    "source.organizeImports": "never",
+  },
+  */
+
+  //////////////////////////////////////
+  // if you use Flatpak build of VSCodium, it runs new shell environment.
+  // below config fix this issue.
+  // more info: https://github.com/flathub/com.vscodium.codium
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/app/bin/host-spawn",
+      "args": ["bash"],
+      "icon": "terminal-bash",
+      "overrideName": true
+    }
+  },
+  //////////////////////////////////////
+  // end of Flatpak config
+  //////////////////////////////////////
+
+  //////////////////////////////////////
+  // TELEMETRY
+  // usefull resource:
+  // https://github.com/VSCodium/vscodium/blob/master/docs/telemetry.md
+  "chat.commandCenter.enabled": false,
+  "clangd.checkUpdates": false,
+  "code-runner.enableAppInsights": false,
+  "docker-explorer.enableTelemetry": false, 
+  "extensions.ignoreRecommendations": true, // VSCode Core
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false, 
+  "go.showWelcome": false,
+  "go.survey.prompt": false,
+  "java.help.showReleaseNotes": false, // Language Support for Java
+  "julia.enableTelemetry": false, 
+  "kite.showWelcomeNotificationOnStartup": false, 
+  "Lua.telemetry.enable": false, 
+  "material-icon-theme.showWelcomeMessage": false,
+  "pros.showWelcomeOnStartup": false,
+  "pros.useGoogleAnalytics": false,
+  "redhat.telemetry.enabled": false, // Red Hat
+  "rpcServer.showStartupMessage": false, // VSCode Remote Development
+  "sonarlint.disableTelemetry": true,
+  "telemetry.enableCrashReporter": false, // VSCode Core
+  "telemetry.feedback.enabled": false,
+  "telemetry.editStats.enabled": false,
+  "workbench.welcomePage.extraAnnouncements": false,
+  "terraform.telemetry.enabled": false, // HashiCorp Terraform
+  "vsicons.dontShowNewVersionMessage": true,
+  "workbench.iconTheme": null,
+  //////////////////////////////////////
+  // end of TELEMETRY
+  //////////////////////////////////////
+
+  //////////////////////////////////////
+  // FIREWALL
+  // via fake proxy.
+  "http.proxy": "https://notexist11111111:9999",
+  "http.noProxy": [
+    // This array includes the bypass list.
+
+    /*
+    CHECK/TEST NETWORK REQUESTS MADE BY VSCODE AND EXTENSIONS:
+
+    Help (from main menu)  --> Toogle developer tools --> network (tab)
+    */
+
+    /*
+    FOR VSCODE ONLY.
+    source: https://code.visualstudio.com/docs/setup/network#_common-hostnames
+
+    "update.code.visualstudio.com",
+    "code.visualstudio.com",
+    "go.microsoft.com",
+    "marketplace.visualstudio.com",
+    "*.gallery.vsassets.io",
+    "*.gallerycdn.vsassets.io",
+    "rink.hockeyapp.net",
+    "bingsettingssearch.trafficmanager.net",
+    "vscode.search.windows.net",
+    "raw.githubusercontent.com",
+    "vsmarketplacebadges.dev",
+    "*.vscode-cdn.net",
+    "vscode.download.prss.microsoft.com",
+    "download.visualstudio.microsoft.com",
+    "vscode-sync.trafficmanager.net",
+    "vscode-sync-insiders.trafficmanager.net",
+    "vscode.dev",
+    "*.vscode-unpkg.net",
+    "default.exp-tas.com",
+    */
+
+    // FOR VSCODIUM ONLY
+    // main readme files of extensions (when you open from extension search result)
+    "openvsxorg.blob.core.windows.net", 
+    "*.open-vsx.org",
+    "open-vsx.org",
+
+    // You may need to enable for language-servers-protocols...
+    // "localhost:*",
+    // "127.0.0.1:*"
+  ],
+  //////////////////////////////////////
+  // end of FIREWALL
+  //////////////////////////////////////
+
+}
