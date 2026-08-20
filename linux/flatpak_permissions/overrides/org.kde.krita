@@ -1,0 +1,5 @@
+[Context]
+shared=!ipc;!network
+sockets=!pulseaudio
+devices=!dri
+filesystems=home;!host
