@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=firefox_p_daily
+Exec=firefox -P "p_daily" --class firefox_p_daily
+Icon=/home/user1/icons/firefox_p_daily.jpg
+StartupWMClass=firefox_p_daily
