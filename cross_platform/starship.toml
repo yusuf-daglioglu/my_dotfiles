@@ -1,0 +1,52 @@
+format = '$all'
+
+[character]
+format='$symbol'
+success_symbol = '[➜](bold green) '
+error_symbol = '[➜](bold green) ' # because we show exit code
+
+[directory]
+truncation_length = 8
+truncation_symbol = '…/'
+style = 'bold fg:#ffffff bg:#007acc'
+home_symbol = '$HOME'
+read_only = ' 🔒read-only-directory'
+read_only_style = 'bold fg:#ffffff bg:#ffcc00'
+
+[shell]
+disabled = false
+bash_indicator ='bash'
+fish_indicator = 'fish'
+style = 'bold fg:#ffffff bg:#00a651'
+
+[shlvl]
+disabled = false
+format = '[↕️ level:$shlvl]($style) '
+style = 'bold fg:#ffffff bg:#00bcd4'
+
+[status]
+disabled = false
+style = 'bold fg:#ffffff bg:#e53935'
+recognize_signal_code = true
+format = '[exit code:$status]($style) '
+
+[sudo]
+style = 'bold fg:#ffffff bg:#d81b60'
+format = '[sudo password cached ]($style)'
+disabled = false
+
+[time]
+disabled = false
+style = 'bold fg:#ffffff bg:#8e24aa'
+format = '[🕙$time]($style) '
+
+[custom.empty_dir]
+command = '[ -z "$(ls -A)" ] && echo empty directory'
+when = ''' [ "$STARSHIP_SHELL" = "bash" ] || [ "$STARSHIP_SHELL" = "zsh" ] || [ "$STARSHIP_SHELL" = "sh" ] '''
+style = 'bold fg:#ffffff bg:#fb8c00'
+disabled = false
+
+[cmd_duration]
+min_time = 1000
+style = 'bold fg:#ffffff bg:#00695c'
+format = '[took $duration seconds]($style)'

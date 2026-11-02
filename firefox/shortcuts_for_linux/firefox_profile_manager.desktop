@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=firefox_profile_manager
+Exec=firefox -P -no-remote --class firefox_profile_manager
+Icon=/home/user1/icons/firefox_profile_manager.jpg
+StartupWMClass=firefox_profile_manager
