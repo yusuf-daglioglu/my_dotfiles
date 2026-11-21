@@ -1,0 +1,34 @@
+[Context]
+shared=!ipc
+sockets=!cups;!pcsc;!x11
+devices=!all
+features=!bluetooth
+filesystems=!xdg-desktop;!xdg-run/pipewire-0;!xdg-run/dconf;!xdg-download;!~/.local/share/icons;!~/.config/dconf;!/run/.heim_org.h5l.kcm-socket;!~/.local/share/applications;!/tmp;!~/.config/kioslaverc;!host-etc
+
+[Environment]
+GSETTINGS_BACKEND=
+GIO_EXTRA_MODULES=
+CHROME_VERSION_EXTRA=
+DCONF_USER_CONFIG_DIR=
+
+[System Bus Policy]
+org.freedesktop.Avahi=none
+org.freedesktop.UPower=none
+org.bluez=none
+
+[Session Bus Policy]
+org.freedesktop.Notifications=none
+org.freedesktop.FileManager1=none
+org.kde.kwalletd5=none
+org.mate.ScreenSaver=none
+org.xfce.ScreenSaver=none
+org.gnome.Mutter.IdleMonitor.*=none
+org.freedesktop.ScreenSaver=none
+org.cinnamon.ScreenSaver=none
+org.freedesktop.secrets=none
+ca.desrt.dconf=none
+com.canonical.AppMenu.Registrar=none
+org.gnome.SessionManager=none
+org.kde.kwalletd6=none
+org.gnome.ScreenSaver=none
+org.mpris.MediaPlayer2.brave.*=none
