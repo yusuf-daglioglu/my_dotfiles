@@ -1,0 +1,14 @@
+[Context]
+shared=!ipc;!network
+
+[Session Bus Policy]
+org.kde.kwalletd5=none
+org.kde.kwalletd=none
+org.freedesktop.secrets=none
+org.freedesktop.PowerManagement=none
+org.kde.StatusNotifierWatcher=none
+org.kde.KGlobalSettings=none
+org.freedesktop.ScreenSaver=none
+com.canonical.AppMenu.Registrar=none
+org.kde.kconfig.notify=none
+org.mpris.MediaPlayer2.Player=none

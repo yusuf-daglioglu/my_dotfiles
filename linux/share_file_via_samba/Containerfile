@@ -1,0 +1,22 @@
+FROM fedora:latest
+
+RUN dnf install -y samba && dnf clean all
+RUN useradd -m userContainer
+
+COPY smb.conf /etc/samba/smb.conf
+
+RUN cat > /start.sh <<'EOF'
+#!/bin/bash
+set -e
+
+mkdir -p /var/lib/samba/private
+echo "Samba password:"
+smbpasswd -a userContainer
+
+exec smbd --foreground --no-process-group
+EOF
+
+RUN chmod +x /start.sh
+
+EXPOSE 445
+CMD ["/start.sh"]

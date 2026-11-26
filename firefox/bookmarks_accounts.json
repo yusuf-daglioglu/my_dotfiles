@@ -1,0 +1,224 @@
+{
+    "guid": "root________",
+    "title": "",
+    "index": 0,
+    "dateAdded": 1771007172832000,
+    "lastModified": 1771007172832000,
+    "id": 1,
+    "typeCode": 2,
+    "type": "text/x-moz-place-container",
+    "root": "placesRoot",
+    "children": [
+        {
+            "guid": "menu________",
+            "title": "menu",
+            "index": 0,
+            "dateAdded": 1771007172832000,
+            "lastModified": 1771007172832000,
+            "id": 2,
+            "typeCode": 2,
+            "type": "text/x-moz-place-container",
+            "root": "bookmarksMenuFolder"
+        },
+        {
+            "guid": "toolbar_____",
+            "title": "toolbar",
+            "index": 1,
+            "dateAdded": 1771007172832000,
+            "lastModified": 1771007172832000,
+            "id": 3,
+            "typeCode": 2,
+            "type": "text/x-moz-place-container",
+            "root": "toolbarFolder",
+            "children": [
+                {
+                    "guid": "Jvk3uaQCLrsI",
+                    "title": "PROFILE: accounts",
+                    "index": 0,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 7,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "about:profiles"
+                },
+                {
+                    "guid": "DtkAkd8Rh2d7",
+                    "title": "about config",
+                    "index": 1,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 8,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "about:config"
+                },
+                {
+                    "guid": "3kQUcJQFPY3d",
+                    "title": "WhatsApp",
+                    "index": 2,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 9,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://web.whatsapp.com/"
+                },
+                {
+                    "guid": "qz9jStCuF_5H",
+                    "title": "LinkedIn",
+                    "index": 3,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 10,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://www.linkedin.com/"
+                },
+                {
+                    "guid": "nwNfy218wr7R",
+                    "title": "Instagram",
+                    "index": 4,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 11,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://www.instagram.com/"
+                },
+                {
+                    "guid": "nJR-ES4-l10j",
+                    "title": "Gmail",
+                    "index": 5,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 12,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://gmail.com/"
+                },
+                {
+                    "guid": "WARmWIzdTMsk",
+                    "title": "Google Drive",
+                    "index": 6,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 13,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://drive.google.com/drive/"
+                },
+                {
+                    "guid": "-MpIByZdPFu2",
+                    "title": "X(Twitter)",
+                    "index": 7,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 14,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://x.com/"
+                },
+                {
+                    "guid": "fJnmIBPljnOj",
+                    "title": "Outlook(hotmail)",
+                    "index": 8,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 15,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://outlook.live.com/mail/"
+                },
+                {
+                    "guid": "WEdeL021sAhr",
+                    "title": "OneDrive",
+                    "index": 9,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 16,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://onedrive.live.com/"
+                },
+                {
+                    "guid": "GRlJlLB4hgyu",
+                    "title": "Yandex Mail",
+                    "index": 10,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 17,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://mail.yandex.com/"
+                },
+                {
+                    "guid": "qTIzLIZJpdKO",
+                    "title": "Yandex Disk",
+                    "index": 11,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 18,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://disk.yandex.com.tr/"
+                },
+                {
+                    "guid": "mxU7-OnMBR1A",
+                    "title": "GitHub",
+                    "index": 12,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 19,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://github.com/"
+                },
+                {
+                    "guid": "KaID2pjEFFoW",
+                    "title": "IMDb",
+                    "index": 13,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 20,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://www.imdb.com/"
+                },
+                {
+                    "guid": "KaID2pjEFFo1",
+                    "title": "virtual machines",
+                    "index": 14,
+                    "dateAdded": 1771007172832000,
+                    "lastModified": 1771007172832000,
+                    "id": 20,
+                    "typeCode": 1,
+                    "type": "text/x-moz-place",
+                    "uri": "https://localhost:9090/machines"
+                }
+            ]
+        },
+        {
+            "guid": "unfiled_____",
+            "title": "unfiled",
+            "index": 3,
+            "dateAdded": 1771007172832000,
+            "lastModified": 1771007172832000,
+            "id": 5,
+            "typeCode": 2,
+            "type": "text/x-moz-place-container",
+            "root": "unfiledBookmarksFolder"
+        },
+        {
+            "guid": "mobile______",
+            "title": "mobile",
+            "index": 4,
+            "dateAdded": 1771007172832000,
+            "lastModified": 1771007172832000,
+            "id": 6,
+            "typeCode": 2,
+            "type": "text/x-moz-place-container",
+            "root": "mobileFolder"
+        }
+    ]
+}
